@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    font-family: Open Sans, Arial;
+    background-color: #eee !important;
+    color: #424242;
+}
+
+a:link {
+    color: #01579B;
+}
+
+a:hover {
+    color: #0288D1;
+}
+
+a:visited {
+    color: #4E342E;
+}
+
+ul.dashed {
+    list-style-type: none;
+    padding: 5px;
+}
+
+ul.dashed > li {
+    text-indent: -5px;
+}
+
+ul.dashed > li:before {
+    content: "\2014  ";
+    text-indent: -5px;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.header {
+    color: #616161;
+    letter-spacing: 1.0px;
+    font-size: 19px;
+}
+
+.wrapper {
+    display: flex;
+    align-content: flex-around;
+}
+
+.content_left {
+    flex-grow: 1;
+}
+
+.content_right {
+    flex-grow: 0 
+    flex-shrink: 0 
+    flex-basis: 40%;
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+#mainblock {
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10px;
+    padding: 5px 0px 5px 20px;
+    border: 2px solid #BDBDBD;
+    box-shadow: 0 0 20px #ccc;
+    box-sizing: border-box;
+}
+
+#secondblock {
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 5px 0px 5px 20px;
+    font-weight: bold;
+}
+
+.selected {
+    font-weight: bold;
+}
+
+.square_hidden {
+    width: 50px;
+    height: 50px;
+    background: #5C6BC0;
+    border: 1px solid #616161;
+    opacity: 0;
+}
+
+.square_show {
+    width: 50px;
+    height: 50px;
+    background: #5C6BC0;
+    border: 1px solid #616161;
+}
