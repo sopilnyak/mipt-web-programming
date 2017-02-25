@@ -1,55 +1,126 @@
-const SIZE_N = 5;
-const SIZE_M = 5;
-const MAX_CLICK_NUMBER = 9;
+SIZE_N = 5;
+SIZE_M = 5;
+MAX_CLICK_NUMBER = 9;
 
 document.addEventListener("DOMContentLoaded", ready);
 
 function ready() {
 
-    var table = document.createElement("table");
-    document.getElementById("game_area").appendChild(table);
+    /* Ractive Example */
 
-    for (var i = 0; i < SIZE_N; ++i) {
-        var row = document.createElement("tr");
-
-        for (var j = 0; j < SIZE_M; ++j) {
-            var square = document.createElement("td");
-            square.className = "square_hidden";
-
-            var squareId = i * SIZE_N + j
-            square.id = "square" + squareId;
-
-            row.appendChild(square);
+    var ractive = new Ractive({
+        el: '#information',
+        template: '#template',
+        data: {
+            instance: {
+                id: Math.round(Math.random() * 10000),
+                code: Math.round(Math.random() * 100000)
+            },
+            rules: 'Click the squares as quickly as possible.',
+            formatter: codeFormatter,
+            isRulesShown: false
         }
-        
-        table.appendChild(row);
+    });
+
+    function codeFormatter(code) {
+        return 'id' + code;
     }
 
-    var square = [];
-
-    function showSquare(number, clickNumber, startTime) {
-        if (clickNumber == 1) {
-            startTime = performance.now();
+    ractive.on({
+        show_message: function() {
+            document.getElementById("about").className = "rules";
+        },
+        hide_message: function() {
+            document.getElementById("about").className = "hidden";
+            ractive.set({
+                isRulesShown: true
+            })
         }
-        if (clickNumber > MAX_CLICK_NUMBER) {
-            var finishTime = performance.now();
-            document.getElementById("win").innerHTML = "";
-            document.getElementById("game_area").innerHTML 
-                = "You win! Your time: " + Math.round((finishTime - startTime)) + "ms";
-            return;
-        }
-        square[number] = document.getElementById("square" + number);
-        square[number].className = "square_show";
+    });
 
-        square[number].onclick = function() { hideButton(); };
+    var numbers = []
 
-        function hideButton() {
-            square[number].className = "square_hidden";
-            document.getElementById("win").innerHTML = clickNumber + 1;
-            square[number].onclick = function() { return false; };
-            showSquare(Math.floor(Math.random() * SIZE_N * SIZE_M), ++clickNumber, startTime);
+    var ractiveTable = new Ractive({
+        el: '#table',
+        template: '#template_table',
+        data: {
+            random_numbers: numbers
         }
+    })
+
+    ractiveTable.on({
+        add: function() {
+            var newNumber = {
+                id: Math.round(Math.random() * 10000),
+                number: Math.round(Math.random() * 100000)
+            };
+            numbers.push(newNumber);
+            ractiveTable.update('random_numbers');
+        }
+    });
+
+    /* END Ractive Example */
+
+    /* Game */
+
+    function play() {
+        var table = document.createElement("table");
+        document.getElementById("game_area").appendChild(table);
+
+        // Generate squares
+        for (var i = 0; i < SIZE_N; ++i) {
+            var row = document.createElement("tr");
+
+            for (var j = 0; j < SIZE_M; ++j) {
+                var square = document.createElement("td");
+                square.className = "square_hidden";
+
+                var squareId = i * SIZE_N + j
+                square.id = "square" + squareId;
+
+                row.appendChild(square);
+            }
+            
+            table.appendChild(row);
+        }
+
+        var square = [];
+        var times = [];
+
+        // Play the game
+        function showSquare(number, clickNumber, startTime) {
+            if (clickNumber == 1) {
+                startTime = performance.now();
+            }
+            if (clickNumber > MAX_CLICK_NUMBER) {
+                var finishTime = performance.now();
+                document.getElementById("win").innerHTML = "";
+                document.getElementById("game_area").innerHTML 
+                    = "You win! Your time: " + Math.round((finishTime - startTime)) + "ms. <a href=''>Play again</a>.";
+                var newTime = {
+                    clickNumber: MAX_CLICK_NUMBER,
+                    time: Math.round((finishTime - startTime))
+                }
+                times.push(newTime);
+                return;
+            }
+            square[number] = document.getElementById("square" + number);
+            square[number].className = "square_show";
+
+            square[number].onclick = function() { hideButton(); };
+
+            function hideButton() {
+                square[number].className = "square_hidden";
+                document.getElementById("win").innerHTML = clickNumber + 1;
+                square[number].onclick = function() { return false; };
+                showSquare(Math.floor(Math.random() * SIZE_N * SIZE_M), ++clickNumber, startTime);
+            }
+        }
+
+        showSquare(Math.floor(Math.random() * SIZE_N * SIZE_M), 0, 0);
     }
 
-    showSquare(Math.floor(Math.random() * SIZE_N * SIZE_M), 0, 0);
+    play();
+
+    /* END Game */
 }

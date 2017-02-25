@@ -70,11 +70,23 @@ ul.dashed > li:before {
     box-sizing: border-box;
 }
 
-#secondblock {
+#game {
     margin-left: 25%;
     margin-right: 25%;
     padding: 5px 0px 5px 20px;
     font-weight: bold;
+}
+
+#information {
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 5px 0px 5px 20px;
+}
+
+#table {
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 5px 0px 5px 20px;
 }
 
 .selected {
@@ -94,4 +106,26 @@ ul.dashed > li:before {
     height: 50px;
     background: #5C6BC0;
     border: 1px solid #616161;
+}
+
+.menu {
+    border-bottom: 1px dashed #999;
+    display: inline;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.rules {
+    font-style: italic;
+}
+
+table.random_numbers {
+    width: 100%;
+}
+
+th {
+    text-align: left;
 }
