@@ -186,3 +186,7 @@ br {
     z-index: 1;
     float: right;
 }
+
+form {
+    margin-bottom: 10px;
+}

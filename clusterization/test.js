@@ -1,8 +1,17 @@
 SIZE_N = 5;
 SIZE_M = 5;
-MAX_CLICK_NUMBER = 9;
+maxClickNumber = 9;
 
 document.addEventListener("DOMContentLoaded", ready);
+
+function generateNumber() {
+    var form = document.forms.setNumber;
+    var steps = form.elements.input.value;
+    if (steps < 1 || steps > 1000) {
+        alert("Wrong number: enter positive integer from 1 to 1000");
+    }
+    maxClickNumber = steps - 1;
+}
 
 function ready() {
 
@@ -74,7 +83,7 @@ function ready() {
             },
             sortColumn: 'num'
         }
-    })
+    });
 
     ractiveTable.on({
         add: function() {
@@ -124,13 +133,14 @@ function ready() {
             if (clickNumber == 1) {
                 startTime = performance.now();
             }
-            if (clickNumber > MAX_CLICK_NUMBER) {
+            if (clickNumber > maxClickNumber) {
                 var finishTime = performance.now();
                 document.getElementById("win").innerHTML = "";
+                document.getElementById("steps").className = "hidden"
                 document.getElementById("game_area").innerHTML 
                     = "You win! Your time: " + Math.round((finishTime - startTime)) + "ms. <a href=''>Play again</a>.";
                 var newTime = {
-                    clickNumber: MAX_CLICK_NUMBER,
+                    clickNumber: maxClickNumber,
                     time: Math.round((finishTime - startTime))
                 }
                 times.push(newTime);

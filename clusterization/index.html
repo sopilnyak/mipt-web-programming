@@ -31,6 +31,7 @@
 
     <div id="game">
         <script id="template_top" type="text/ractive">
+
             <div class="menu" id="activate" 
                 on-click="activate_bootstrap">
                 {{#if isBootstrapDeactivated}}
@@ -39,6 +40,14 @@
                 </div>
 
             <p class="header strong">Game</p>
+
+            <div id="steps">
+                Enter number of steps:
+                <form name="setNumber" onsubmit="generateNumber(); return false;">
+                    <input type="text" id="steps_number" name="input" placeholder="10" style="width: 50px">
+                    <input type="submit" value="Run"><span id="result1"></span>
+                </form>
+            </div>
 
             <div id="game_area"></div>
             <div id="win"></div>
