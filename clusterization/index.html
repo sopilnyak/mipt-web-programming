@@ -7,6 +7,8 @@
     <script type="text/javascript" src="test.js"></script>
 </head>
 <body background="#fff"> <!-- не белое, потому что !important -->
+    <div id="header">
+    </div>
 
     <div id="mainblock">
         <p class="header strong">Какой-то заголовок</p>
@@ -28,14 +30,23 @@
     </div>
 
     <div id="game">
-        <p class="header strong">Game</p>
+        <script id="template_top" type="text/ractive">
+            <div class="menu" id="activate" 
+                on-click="activate_bootstrap">
+                {{#if isBootstrapDeactivated}}
+                    Activate Bootstrap
+                {{/if}}
+                </div>
 
-        <div id="game_area"></div>
-        <div id="win"></div>
+            <p class="header strong">Game</p>
+
+            <div id="game_area"></div>
+            <div id="win"></div>
+            <br>
+        </script>
     </div>
 
     <div id="information">
-        
         <script id="template" type="text/ractive">
             <span class="menu" on-mouseover='show_message' 
                 on-mouseout='hide_message'>About the game</span>
@@ -56,12 +67,12 @@
             <span class="menu" on-click='add'>Generate a number</span>
             <table class="random_numbers">
             <tr>
-                <th>#</th>
-                <th>ID</th>
-                <th>Number</th>
+                <th on-click="sort: num"># &#9662;</th>
+                <th on-click="sort: id">ID &#9662;</th>
+                <th on-click="sort: number">Number &#9662;</th>
             </tr>
 
-            {{#each random_numbers: num}}
+            {{#each sort(random_numbers, sortColumn): num}}
             <tr>
                 <td>{{num + 1}}</td>
                 <td>{{id}}</td>

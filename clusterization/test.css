@@ -68,6 +68,7 @@ ul.dashed > li:before {
     border: 2px solid #BDBDBD;
     box-shadow: 0 0 20px #ccc;
     box-sizing: border-box;
+    z-index: 2;
 }
 
 #game {
@@ -112,6 +113,13 @@ ul.dashed > li:before {
     border-bottom: 1px dashed #999;
     display: inline;
     cursor: pointer;
+    opacity: 1;
+    transition-duration: .3s;
+}
+
+.menu:hover {
+    opacity: 0.6;
+    transition-duration: .3s;
 }
 
 .hidden {
@@ -127,5 +135,54 @@ table.random_numbers {
 }
 
 th {
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
+}
+
+table.random_numbers tr {
+    opacity: 1;
+    transition-duration: .3s;
+}
+
+table.random_numbers td {
+    opacity: 1;
+    transition-duration: .3s;
+    text-align: center;
+}
+
+table.random_numbers tr:hover {
+    opacity: 0.6;
+    transition-duration: .3s;
+}
+
+table.random_numbers td:hover {
+    transform: scale(1.4);
+    transform-origin: center;
+}
+
+#game_area {
+    float: left;
+    position: relative;
+    left: 30px;
+}
+
+#win {
+    float: right;
+    font-size: 20px;
+}
+
+br {
+    clear: both;
+}
+
+#header {
+    width: 50px;
+    height: 50px;
+    background: #5C6BC0;
+    border: 2px solid #616161;
+    margin-right: 25%;
+    margin-bottom: -30px;
+    opacity: 0.4;
+    z-index: 1;
+    float: right;
 }

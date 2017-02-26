@@ -18,7 +18,7 @@ function ready() {
             },
             rules: 'Click the squares as quickly as possible.',
             formatter: codeFormatter,
-            isRulesShown: false
+            isRulesShown: false,
         }
     });
 
@@ -38,13 +38,41 @@ function ready() {
         }
     });
 
+    var ractiveTop = new Ractive({
+        el: '#game',
+        template: '#template_top',
+        data: {
+            isBootstrapDeactivated: true
+        }
+    });
+    
+
+    ractiveTop.on({
+        activate_bootstrap: function() {
+            document.getElementById("activate").className = "hidden";
+            document.getElementById("header").innerHTML 
+                = '<link rel="stylesheet" \
+                href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" \
+                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" \
+                crossorigin="anonymous">'  
+        }
+    });
+
+
     var numbers = []
 
     var ractiveTable = new Ractive({
         el: '#table',
         template: '#template_table',
         data: {
-            random_numbers: numbers
+            random_numbers: numbers,
+            sort: function (array, column) {
+                array = array.slice();
+                return array.sort(function (a, b) {
+                    return a[column] < b[column] ? -1 : 1;
+                });
+            },
+            sortColumn: 'num'
         }
     })
 
@@ -56,7 +84,11 @@ function ready() {
             };
             numbers.push(newNumber);
             ractiveTable.update('random_numbers');
+        },
+        sort: function (event, column) {
+            this.set('sortColumn', column);
         }
+
     });
 
     /* END Ractive Example */
