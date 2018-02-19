@@ -3,7 +3,6 @@
 <head>
     <link rel="stylesheet" href="test.css">
     <title>Testing testing 1 2 3</title>
-    <script src='http://cdn.ractivejs.org/latest/ractive.min.js'></script>
     <script type="text/javascript" src="test.js"></script>
 </head>
 <body background="#fff"> <!-- не белое, потому что !important -->
@@ -30,14 +29,6 @@
     </div>
 
     <div id="game">
-        <script id="template_top" type="text/ractive">
-
-            <div class="menu" id="activate" 
-                on-click="activate_bootstrap">
-                {{#if isBootstrapDeactivated}}
-                    Activate Bootstrap
-                {{/if}}
-                </div>
 
             <p class="header strong">Game</p>
 
@@ -52,44 +43,6 @@
             <div id="game_area"></div>
             <div id="win"></div>
             <br>
-        </script>
-    </div>
-
-    <div id="information">
-        <script id="template" type="text/ractive">
-            <span class="menu" on-mouseover='show_message' 
-                on-mouseout='hide_message'>About the game</span>
-            <span id="about" class="hidden">
-                {{#if isRulesShown}}
-                    You have already seen the rules!
-                {{else}}
-                    {{rules}}
-                {{/if}}
-            </span>
-        </script>
-    </div>
-
-    <div id="table">
-        <script id="template_table" type="text/ractive">
-            <p class="header strong">Random number generator</p>
-
-            <span class="menu" on-click='add'>Generate a number</span>
-            <table class="random_numbers">
-            <tr>
-                <th on-click="sort: num"># &#9662;</th>
-                <th on-click="sort: id">ID &#9662;</th>
-                <th on-click="sort: number">Number &#9662;</th>
-            </tr>
-
-            {{#each sort(random_numbers, sortColumn): num}}
-            <tr>
-                <td>{{num + 1}}</td>
-                <td>{{id}}</td>
-                <td>{{number}}</td>
-            </tr>
-            {{/each}}
-            </table>
-        </script>
     </div>
 
 </body>
